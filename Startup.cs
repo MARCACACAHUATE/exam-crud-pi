@@ -16,6 +16,7 @@ namespace crud
 {
     public class Startup
     {
+        readonly string MiCors = "Micors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +27,13 @@ namespace crud
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(option => {
+                option.AddPolicy(name: MiCors, builder => {
+                    builder.WithHeaders("*");
+                    builder.WithOrigins("*");
+                    builder.WithMethods("*");
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -43,6 +51,7 @@ namespace crud
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "crud v1"));
             }
+            app.UseCors(MiCors);
 
             app.UseHttpsRedirection();
 
