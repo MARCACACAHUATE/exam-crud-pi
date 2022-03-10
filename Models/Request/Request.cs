@@ -4,8 +4,8 @@ namespace crud.Models.Request {
          public long id {get; set;}
          public string folio {get;set;}
          public string fecha {get; set;}
-         public float monto {get; set;}
-         public float saldo {get; set;}
+         public decimal monto {get; set;}
+         public decimal saldo {get; set;}
          public string motivo {get; set;}
         public int num_emp {get; set;}
         public int num_empe {get; set;}
